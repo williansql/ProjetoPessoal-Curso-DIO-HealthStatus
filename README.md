@@ -66,18 +66,20 @@ erDiagram
         string email
         string document
         boolean isActive
+        int family_group_id fk
+        int references_id fk
+        int lifestyle_id fk
     }
 
     PRONTUARY {
         int id PK
-        int patient_id FK
+        int patient_id fk
         date createDate
-        int family_group_id fk
     }
 
      MEDICAL_EXAMINATION{
         int id PK
-        int prontuary_id FK
+        int prontuary_id fk
         date examinationDate
         string typeExamination
         string result
@@ -93,7 +95,7 @@ erDiagram
 
     REFERENCES {
         int id PK
-        int patient_id FK
+        int patient_id fk
         string comercialReferencedName
         string phoneComercialReferenced
         string relationshipReferencedComercial
@@ -101,7 +103,7 @@ erDiagram
 
     LIFESTYLE {
         int id PK
-        int patient_id FK
+        int patient_id fk
         string eatingHabits
         string physicalActivity
         bool smoker
@@ -113,14 +115,16 @@ erDiagram
         role typeUser
         string login
         string password
+        int prontuary_id fk
     }
 
+    USERS ||--o{ PRONTUARY : "have"
+    PRONTUARY ||--o{ MEDICAL_EXAMINATION : "have"
     PATIENT ||--o{ PRONTUARY : "have"
-    PRONTUARY ||--o{ MEDICAL_EXAMINATION : "contain"
     PATIENT ||--o{ FAMILY_GROUP : "have"
     PATIENT ||--o{ REFERENCES : "have"
     PATIENT ||--o{ LIFESTYLE : "have"
-    USERS ||--o{ PRONTUARY : "register"
+
 ```
 # Em seguida está o fluxo do usuário do sistema para a construção e planejamento no Figma(EM CONSTRUÇÃO).
 

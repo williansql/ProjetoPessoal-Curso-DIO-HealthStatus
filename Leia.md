@@ -1,1 +1,0 @@
-amizade de C# é Java

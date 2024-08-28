@@ -56,75 +56,71 @@ graph TD
 
 ```mermaid
 erDiagram
-    PACIENTE {
-        int id PK
+     PATIENT {
+        Long id PK
         string nome
-        date data_nascimento
-        string sexo
-        string endereco
-        string telefone
+        date dateOfBirth
+        string gender
+        string address
+        string phone
+        string email
+        string document
+        boolean isActive
     }
 
-    PRONTUARIO {
+    PRONTUARY {
         int id PK
-        int paciente_id FK
-        date data_criacao
-        int responsavel_id FK
+        int patient_id FK
+        date createDate
+        int family_group_id fk
     }
 
-    EXAME_MEDICO {
+     MEDICAL_EXAMINATION{
         int id PK
-        int prontuario_id FK
-        date data_exame
-        string tipo_exame
-        string resultado
+        int prontuary_id FK
+        date examinationDate
+        string typeExamination
+        string result
     }
 
-    GRUPO_FAMILIAR {
+    FAMILY_GROUP {
         int id PK
-        int paciente_id FK
-        string nome_familiar
-        string relacao
+        int patient_id FK
+        string responsibleName
+        string responsibleDocument
+        string relationship
     }
 
-    REFERENCIAS {
+    REFERENCES {
         int id PK
-        int paciente_id FK
-        string nome
-        string telefone
-        string relacao
+        int patient_id FK
+        string comercialReferencedName
+        string phoneComercialReferenced
+        string relationshipReferencedComercial
     }
 
-    ESTILO_VIDA {
+    LIFESTYLE {
         int id PK
-        int paciente_id FK
-        string habitos_alimentares
-        string atividade_fisica
-        bool fumante
+        int patient_id FK
+        string eatingHabits
+        string physicalActivity
+        bool smoker
     }
 
-    INFORMACOES_SAUDE {
+    USERS {
         int id PK
-        int paciente_id FK
-        string historico_medico
-        string alergias
-    }
-
-    USUARIO {
-        int id PK
-        string nome
-        string tipo_usuario
+        string name
+        role typeUser
         string login
-        string senha
+        string password
     }
 
-    PACIENTE ||--o{ PRONTUARIO : "possui"
-    PRONTUARIO ||--o{ EXAME_MEDICO : "contém"
-    PACIENTE ||--o{ GRUPO_FAMILIAR : "tem"
-    PACIENTE ||--o{ REFERENCIAS : "tem"
-    PACIENTE ||--o{ ESTILO_VIDA : "tem"
-    PACIENTE ||--o{ INFORMACOES_SAUDE : "tem"
-    USUARIO ||--o{ PRONTUARIO : "registra"
+    PATIENT ||--o{ PRONTUARY : "have"
+    PRONTUARY ||--o{ MEDICAL_EXAMINATION : "contain"
+    PATIENT ||--o{ FAMILY_GROUP : "have"
+    PATIENT ||--o{ REFERENCES : "have"
+    PATIENT ||--o{ LIFESTYLE : "have"
+    USERS ||--o{ PRONTUARY : "register"
 ```
 # Em seguida está o fluxo do usuário do sistema para a construção e planejamento no Figma(EM CONSTRUÇÃO).
 

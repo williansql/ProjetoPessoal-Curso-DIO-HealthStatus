@@ -21,13 +21,16 @@ public class TokenService {
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer("Health Status")
                     .withSubject(user.getLogin())
+                    .withSubject(user.getRole().name())
+                    .withSubject(user.getAuthorities().toString())
+                    .withSubject(user.getUsername())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Error while generating token", exception);
+            throw new RuntimeException("Ocorreu um erro ao gerar o token", exception);
         }
     }
 
@@ -35,12 +38,12 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer("Health Status")
                     .build()
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception){
-            return "";
+            return "Não foi possível verificar o token";
         }
     }
 

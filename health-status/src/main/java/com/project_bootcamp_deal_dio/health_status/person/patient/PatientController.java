@@ -86,4 +86,7 @@ public class PatientController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+
+
+
 }

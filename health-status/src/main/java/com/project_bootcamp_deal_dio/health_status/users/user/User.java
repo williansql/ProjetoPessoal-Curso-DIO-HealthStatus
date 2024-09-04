@@ -1,45 +1,42 @@
-package com.project_bootcamp_deal_dio.health_status.person.users;
+package com.project_bootcamp_deal_dio.health_status.users.user;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.envers.Audited;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
-@EqualsAndHashCode(of = "id")
+@Table(name = "users")
 @Entity
 @Getter
-@Setter
-@Table(name = "users")
-@Audited
 @NoArgsConstructor
-public class Users implements UserDetails {
+@AllArgsConstructor
+@EqualsAndHashCode
+public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String login;
     private String password;
-    private UsersRoleEnum role;
+    private String email;
+    private UserRole role;
 
-    public Users(String login, String encryptedPassword, UsersRoleEnum role) {
+    public User(String login, String password, String email, UserRole role) {
         this.login = login;
-        this.password = encryptedPassword;
+        this.password = password;
+        this.email = email;
         this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UsersRoleEnum.ADMIN) {
-            return List.of (new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("USER"));
-        } else {
-            return List.of(new SimpleGrantedAuthority("USER"));
-        }
+        return null;
     }
 
     @Override
@@ -66,5 +63,4 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

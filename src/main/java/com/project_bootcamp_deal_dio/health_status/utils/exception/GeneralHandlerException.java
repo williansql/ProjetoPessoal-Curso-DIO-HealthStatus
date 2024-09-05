@@ -23,9 +23,10 @@ public class GeneralHandlerException
         return ResponseEntity.status(e.returnStatusCode()).body(apiResponse);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<?> handleUnauthorizedException(UnauthorizedException e) {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.of(e.returnStatusCode(), e.getMessage());
+        return ResponseEntity.status(e.returnStatusCode()).body(apiResponse);
     }
-
 }

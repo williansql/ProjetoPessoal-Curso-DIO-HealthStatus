@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,7 +29,11 @@ public class SecurityConfigurations {
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(
-            auth -> auth.requestMatchers("auth/**").permitAll().anyRequest().authenticated())
+            auth -> auth
+                    .requestMatchers(HttpMethod.POST, "auth/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "patient/**").hasRole("ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.GET, "patient/**").hasRole("ROLE_ADMIN")
+                    .anyRequest().authenticated())
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }

@@ -3,9 +3,8 @@ package com.project_bootcamp_deal_dio.health_status.users.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.project_bootcamp_deal_dio.health_status.users.user.User;
-import com.project_bootcamp_deal_dio.health_status.utils.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +29,11 @@ public class TokenService {
               .sign(algorithm);
       return token;
     } catch (JWTCreationException exception) {
-      throw new RuntimeException("Ocorreu um erro ao criar o token  " + exception.getMessage());
+      throw new RuntimeException("Error while generating token", exception);
     }
   }
 
-  public String validateToken(String token){
+  public String validateToken(String token) {
     try {
       Algorithm algorithm = Algorithm.HMAC256(secret);
       return JWT.require(algorithm)
@@ -42,8 +41,8 @@ public class TokenService {
               .build()
               .verify(token)
               .getSubject();
-    } catch (JWTVerificationException exception) {
-      throw new BadRequestException("Token inválido " + exception.getMessage());
+    } catch (JWTDecodeException exception) {
+      return "Token invalido";
     }
   }
 

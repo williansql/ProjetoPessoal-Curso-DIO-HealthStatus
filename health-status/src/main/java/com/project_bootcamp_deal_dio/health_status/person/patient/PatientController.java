@@ -7,9 +7,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.parser.Entity;
+import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +25,7 @@ public class PatientController {
 
     private final PatientMapper mapper;
     private final PatientService service;
+    private final PatientRepository patientRepository;
 
     @PostMapping
     public ResponseEntity<ApiResponse<Patient>> create(@RequestBody PatientDTO patientDTO){
@@ -32,7 +40,7 @@ public class PatientController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<PaginatedData<Patient>>> findAll(
+    public ResponseEntity<ApiResponse<PaginatedData<Patient>>> findAllPatient(
             @PageableDefault(size = 10, sort = "name", direction = Sort.Direction.ASC)Pageable pageable,
             PatientCriteria criteria){
         ApiResponse<PaginatedData<Patient>> response = new ApiResponse<>();
@@ -45,13 +53,15 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Patient>> findById(@PathVariable Long id){
-        ApiResponse<Patient> response = new ApiResponse<>();
+    public ResponseEntity<ApiResponse<EntityModel<Patient>>> findById(@PathVariable Long id){
+        ApiResponse<EntityModel<Patient>> response = new ApiResponse<>();
         Patient data = service.findById(id);
+        EntityModel<Patient> resources = EntityModel.of(data);
+        resources.add(linkTo(methodOn(PatientController.class).findById(id)).withSelfRel());
         response.of(
                 HttpStatus.OK,
                 "Paciente encontrado com sucesso.",
-                data);
+                resources);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

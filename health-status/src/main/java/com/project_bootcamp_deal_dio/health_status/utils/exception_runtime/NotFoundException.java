@@ -1,4 +1,4 @@
-package com.project_bootcamp_deal_dio.health_status.utils.exception;
+package com.project_bootcamp_deal_dio.health_status.utils.exception_runtime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

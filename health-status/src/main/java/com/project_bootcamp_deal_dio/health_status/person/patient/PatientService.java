@@ -1,14 +1,13 @@
 package com.project_bootcamp_deal_dio.health_status.person.patient;
 
-import com.project_bootcamp_deal_dio.health_status.utils.exception.NotFoundException;
+import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.BadRequestException;
+import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.NotFoundException;
 import com.project_bootcamp_deal_dio.health_status.utils.models.PaginatedData;
 import com.project_bootcamp_deal_dio.health_status.utils.models.Pagination;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,7 @@ public class PatientService {
   public Patient create(Patient patient) {
     Optional<Patient> sameName = repository.findByNameIgnoreCase(patient.getName());
     if (sameName.isPresent()) {
-      throw new IllegalArgumentException(
+      throw new BadRequestException(
           "Esse paciente ja existe em nosso banco de dados. "
               + sameName.get().getName().toUpperCase());
     }

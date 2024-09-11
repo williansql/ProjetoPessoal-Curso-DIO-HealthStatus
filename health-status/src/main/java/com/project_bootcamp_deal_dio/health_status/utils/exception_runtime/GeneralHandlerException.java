@@ -1,4 +1,4 @@
-package com.project_bootcamp_deal_dio.health_status.utils.exception;
+package com.project_bootcamp_deal_dio.health_status.utils.exception_runtime;
 
 import com.project_bootcamp_deal_dio.health_status.utils.models.ApiResponse;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +23,4 @@ public class GeneralHandlerException
         return ResponseEntity.status(e.returnStatusCode()).body(apiResponse);
     }
 
-    @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<?> handleUnauthorizedException(UnauthorizedException e) {
-        ApiResponse apiResponse = new ApiResponse();
-        apiResponse.of(e.returnStatusCode(), e.getMessage());
-        return ResponseEntity.status(e.returnStatusCode()).body(apiResponse);
-    }
 }

@@ -1,7 +1,7 @@
 package com.project_bootcamp_deal_dio.health_status.users.security;
 
 import com.project_bootcamp_deal_dio.health_status.users.user.*;
-import com.project_bootcamp_deal_dio.health_status.utils.exception.BadRequestException;
+import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.BadRequestException;
 import com.project_bootcamp_deal_dio.health_status.utils.models.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

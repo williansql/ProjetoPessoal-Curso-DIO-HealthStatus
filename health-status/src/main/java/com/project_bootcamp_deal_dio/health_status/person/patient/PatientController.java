@@ -1,6 +1,7 @@
 package com.project_bootcamp_deal_dio.health_status.person.patient;
 
 import com.project_bootcamp_deal_dio.health_status.person.patient.dto.PatientDTO;
+import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.BadRequestExceptions;
 import com.project_bootcamp_deal_dio.health_status.utils.models.ApiResponse;
 import com.project_bootcamp_deal_dio.health_status.utils.models.PaginatedData;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +11,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
-import java.util.Optional;
+import java.util.Objects;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -28,9 +29,13 @@ public class PatientController {
     private final PatientRepository patientRepository;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Patient>> create(@RequestBody PatientDTO patientDTO){
+    public ResponseEntity<ApiResponse<Patient>> create(
+            @RequestBody PatientDTO patientDTO,
+            BindingResult result) throws BadRequestExceptions {
         ApiResponse<Patient> response = new ApiResponse<>();
         Patient patient = mapper.transformDTOToEntity(patientDTO);
+        if (result.hasFieldErrors())
+            throw new BadRequestExceptions(Objects.requireNonNull(result.getFieldError().getDefaultMessage()));
         Patient dataSave = service.create(patient);
         response.of(
                 HttpStatus.OK,
@@ -42,7 +47,7 @@ public class PatientController {
     @GetMapping
     public ResponseEntity<ApiResponse<PaginatedData<Patient>>> findAllPatient(
             @PageableDefault(size = 10, sort = "name", direction = Sort.Direction.ASC)Pageable pageable,
-            PatientCriteria criteria){
+            PatientCriteria criteria) throws BadRequestExceptions {
         ApiResponse<PaginatedData<Patient>> response = new ApiResponse<>();
         PaginatedData<Patient> data = service.findAll(pageable, criteria);
         response.of(

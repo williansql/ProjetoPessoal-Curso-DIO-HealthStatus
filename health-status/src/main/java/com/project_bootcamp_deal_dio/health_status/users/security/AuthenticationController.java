@@ -1,7 +1,7 @@
 package com.project_bootcamp_deal_dio.health_status.users.security;
 
 import com.project_bootcamp_deal_dio.health_status.users.user.*;
-import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.BadRequestException;
+import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.BadRequestExceptions;
 import com.project_bootcamp_deal_dio.health_status.utils.models.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,13 +39,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<ApiResponse<User>> register(@RequestBody @Valid RegisterDTO user) {
+    public ResponseEntity<ApiResponse<User>> register(@RequestBody @Valid RegisterDTO user) throws BadRequestExceptions {
         ApiResponse<User> response = new ApiResponse<>();
         Optional<User> userExists = userRepository.findByLoginIgnoreCase(user.login());
         if (userExists.isPresent()) {
-            throw new BadRequestException("Esse usuário já existe em nossa base de dados");
+            throw new BadRequestExceptions("Esse usuário já existe em nossa base de dados");
         } else if (user.login() == null){
-            throw new BadRequestException("Por favor reencha a campo do login");
+            throw new BadRequestExceptions("Por favor reencha a campo do login");
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(user.password());
         User newUser = new User(user.login(), encryptedPassword, user.email(), user.role());

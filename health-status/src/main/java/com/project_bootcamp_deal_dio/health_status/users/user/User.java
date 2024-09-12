@@ -6,9 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Table(name = "users")
 @Entity
@@ -36,7 +39,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if(this.role == UserRole.ROLE_ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        else if (this.role == UserRole.ROLE_CEO) return List.of(new SimpleGrantedAuthority("ROLE_CEO"));
+        else if (this.role == UserRole.ROLE_MANAGER) return List.of(new SimpleGrantedAuthority("ROLE[_MANAGER "));
+        else if (this.role == UserRole.ROLE_COLLABORATOR) return List.of(new SimpleGrantedAuthority("ROLE_COLLABORATOR"));
+        else if (this.role == UserRole.ROLE_DEVELOPER) return List.of(new SimpleGrantedAuthority("ROLE_DEVELOPER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

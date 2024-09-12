@@ -14,13 +14,28 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
+
+    @Column(name = "gender", nullable = false)
     private String gender;
+
+    @Column(name = "address", nullable = false)
     private String Address;
+
+    @Column(name = "cell_phone", nullable = false)
     private String cellphone;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "document", nullable = false)
     private String document;
+
+    @Column(name = "is_active")
     private Boolean isActive;
 
 }

@@ -30,9 +30,11 @@ public class SecurityConfigurations {
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(
             auth -> auth
-                    .requestMatchers(HttpMethod.POST, "auth/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "patient/**").hasRole("ROLE_ADMIN")
-                    .requestMatchers(HttpMethod.GET, "patient/**").hasRole("ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.POST, PathsConstants.publicPaths).permitAll()
+                    .requestMatchers(HttpMethod.POST, PathsConstants.colaboratorPaths).hasAnyAuthority(RoleConstants.collaborator_perms_roles)
+                    .requestMatchers(HttpMethod.GET, PathsConstants.colaboratorPaths).hasAnyAuthority(RoleConstants.collaborator_perms_roles)
+                    .requestMatchers(HttpMethod.PUT, PathsConstants.colaboratorPaths).hasAnyAuthority(RoleConstants.collaborator_perms_roles)
+                    .requestMatchers(HttpMethod.DELETE, PathsConstants.permissionPaths).hasAnyAuthority(RoleConstants.manager_roles)
                     .anyRequest().authenticated())
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();

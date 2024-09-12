@@ -42,7 +42,7 @@ public class TokenService {
               .verify(token)
               .getSubject();
     } catch (JWTDecodeException exception) {
-      return "Token invalido";
+      return "";
     }
   }
 

@@ -1,5 +1,9 @@
-package com.project_bootcamp_deal_dio.health_status.users.security;
+package com.project_bootcamp_deal_dio.health_status.person.users.security;
 
+import com.project_bootcamp_deal_dio.health_status.person.users.user.AuthenticationDTO;
+import com.project_bootcamp_deal_dio.health_status.person.users.user.RegisterDTO;
+import com.project_bootcamp_deal_dio.health_status.person.users.user.User;
+import com.project_bootcamp_deal_dio.health_status.person.users.user.UserRepository;
 import com.project_bootcamp_deal_dio.health_status.users.user.*;
 import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.BadRequestExceptions;
 import com.project_bootcamp_deal_dio.health_status.utils.models.ApiResponse;

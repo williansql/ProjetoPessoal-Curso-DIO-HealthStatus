@@ -1,6 +1,5 @@
-package com.project_bootcamp_deal_dio.health_status.users.security;
+package com.project_bootcamp_deal_dio.health_status.person.users.security;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

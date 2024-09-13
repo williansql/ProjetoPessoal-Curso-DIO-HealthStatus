@@ -1,7 +1,6 @@
-package com.project_bootcamp_deal_dio.health_status.users.security;
+package com.project_bootcamp_deal_dio.health_status.person.users.security;
 
-import com.project_bootcamp_deal_dio.health_status.users.user.User;
-import com.project_bootcamp_deal_dio.health_status.users.user.UserRepository;
+import com.project_bootcamp_deal_dio.health_status.person.users.user.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {

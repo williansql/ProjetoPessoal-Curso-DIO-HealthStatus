@@ -1,6 +1,6 @@
-package com.project_bootcamp_deal_dio.health_status.users.security;
+package com.project_bootcamp_deal_dio.health_status.person.users.security;
 
-import com.project_bootcamp_deal_dio.health_status.users.user.UserRepository;
+import com.project_bootcamp_deal_dio.health_status.person.users.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

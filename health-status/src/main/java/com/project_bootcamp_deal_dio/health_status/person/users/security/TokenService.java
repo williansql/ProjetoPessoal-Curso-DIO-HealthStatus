@@ -1,10 +1,10 @@
-package com.project_bootcamp_deal_dio.health_status.users.security;
+package com.project_bootcamp_deal_dio.health_status.person.users.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.project_bootcamp_deal_dio.health_status.users.user.User;
+import com.project_bootcamp_deal_dio.health_status.person.users.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

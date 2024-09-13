@@ -1,6 +1,6 @@
-package com.project_bootcamp_deal_dio.health_status.users.security;
+package com.project_bootcamp_deal_dio.health_status.person.users.security;
 
-import com.project_bootcamp_deal_dio.health_status.users.user.UserRole;
+import com.project_bootcamp_deal_dio.health_status.person.users.user.UserRole;
 
 public class RoleConstants {
 

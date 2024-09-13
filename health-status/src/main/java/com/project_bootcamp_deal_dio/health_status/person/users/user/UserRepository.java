@@ -1,4 +1,4 @@
-package com.project_bootcamp_deal_dio.health_status.users.user;
+package com.project_bootcamp_deal_dio.health_status.person.users.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;

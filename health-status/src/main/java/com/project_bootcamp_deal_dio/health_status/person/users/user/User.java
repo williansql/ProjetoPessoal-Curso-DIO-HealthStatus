@@ -1,4 +1,4 @@
-package com.project_bootcamp_deal_dio.health_status.users.user;
+package com.project_bootcamp_deal_dio.health_status.person.users.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,10 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-@Table(name = "users")
+@Table(name = "users", schema = "person")
 @Entity
 @Getter
 @NoArgsConstructor

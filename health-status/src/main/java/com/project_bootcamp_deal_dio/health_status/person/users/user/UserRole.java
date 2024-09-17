@@ -1,5 +1,7 @@
 package com.project_bootcamp_deal_dio.health_status.person.users.user;
 
+import jakarta.persistence.Enumerated;
+
 public enum UserRole {
     ROLE_ADMIN("admin"),
     ROLE_USER("user"),

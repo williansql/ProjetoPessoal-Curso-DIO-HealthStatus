@@ -1,9 +1,14 @@
 package com.project_bootcamp_deal_dio.health_status.person.patient;
 
+import com.project_bootcamp_deal_dio.health_status.prontuary.examination.Examination;
+import com.project_bootcamp_deal_dio.health_status.prontuary.lifestyle.Lifestyle;
+import com.project_bootcamp_deal_dio.health_status.prontuary.references.References;
+import com.project_bootcamp_deal_dio.health_status.prontuary.responsible.Responsible;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,5 +42,21 @@ public class Patient {
 
     @Column(name = "is_active")
     private Boolean isActive;
+
+    @OneToMany
+    @JoinColumn(name = "examination_id")
+    private List<Examination> examinations;
+
+    @OneToOne
+    @JoinColumn(name = "lifestyle_id")
+    private Lifestyle lifestyle;
+
+    @OneToOne
+    @JoinColumn(name = "references_id")
+    private References references;
+
+    @OneToOne
+    @JoinColumn(name = "responsible_id")
+    private Responsible responsible;
 
 }

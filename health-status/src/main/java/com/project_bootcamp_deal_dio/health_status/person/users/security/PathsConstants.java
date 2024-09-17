@@ -7,7 +7,7 @@ public class PathsConstants {
     };
     public static final String[] permissionPaths = {
             "/patient/**",
-            "/family_group/**",
+            "/responsible/**",
             "/references/**",
             "/lifestyle/**",
     };

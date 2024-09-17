@@ -1,10 +1,15 @@
 package com.project_bootcamp_deal_dio.health_status.person.patient.dto;
 
+import com.project_bootcamp_deal_dio.health_status.prontuary.examination.Examination;
+import com.project_bootcamp_deal_dio.health_status.prontuary.lifestyle.Lifestyle;
+import com.project_bootcamp_deal_dio.health_status.prontuary.references.References;
+import com.project_bootcamp_deal_dio.health_status.prontuary.responsible.Responsible;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class PatientDTO {
@@ -33,10 +38,13 @@ public class PatientDTO {
     @NotNull
     private String email;
 
-    @NotBlank(message = "Insira o número do seu documento")
-    @NotNull
+    @NotBlank(message = "O documento não pode ficar em branco")
+    @NotNull(message = "O documento não pode fica nulo")
     private String document;
-
     private Boolean isActive;
+    private List<Examination> examinations;
+    private Lifestyle lifestyle;
+    private References references;
+    private Responsible responsible;
 
 }

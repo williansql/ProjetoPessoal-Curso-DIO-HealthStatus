@@ -1,10 +1,8 @@
 package com.project_bootcamp_deal_dio.health_status.person.users.user;
 
+import com.project_bootcamp_deal_dio.health_status.prontuary.prontuary.Prontuary;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +13,7 @@ import java.util.List;
 @Table(name = "users", schema = "person")
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
@@ -29,11 +28,21 @@ public class User implements UserDetails {
     private String email;
     private UserRole role;
 
-    public User(String login, String password, String email, UserRole role) {
+    @OneToMany
+    @JoinColumn(name = "prontuary_id")
+    private List<Prontuary> prontuaryList;
+
+    public User(
+            String login,
+            String password,
+            String email,
+            UserRole role,
+            List<Prontuary> prontuaryList) {
         this.login = login;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.prontuaryList = prontuaryList;
     }
 
     @Override

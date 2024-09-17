@@ -4,7 +4,6 @@ import com.project_bootcamp_deal_dio.health_status.person.users.user.Authenticat
 import com.project_bootcamp_deal_dio.health_status.person.users.user.RegisterDTO;
 import com.project_bootcamp_deal_dio.health_status.person.users.user.User;
 import com.project_bootcamp_deal_dio.health_status.person.users.user.UserRepository;
-import com.project_bootcamp_deal_dio.health_status.users.user.*;
 import com.project_bootcamp_deal_dio.health_status.utils.exception_runtime.BadRequestExceptions;
 import com.project_bootcamp_deal_dio.health_status.utils.models.ApiResponse;
 import jakarta.validation.Valid;
@@ -52,7 +51,7 @@ public class AuthenticationController {
             throw new BadRequestExceptions("Por favor reencha a campo do login");
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(user.password());
-        User newUser = new User(user.login(), encryptedPassword, user.email(), user.role());
+        User newUser = new User(user.login(), encryptedPassword, user.email(), user.role(), user.prontuaryList());
         userRepository.save(newUser);
         response.of(HttpStatus.OK, "Conta criada com sucesso!", newUser);
         return ResponseEntity.status(response.getStatus()).body(response);
